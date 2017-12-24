@@ -1,5 +1,5 @@
-function Fruit() {
-	this.__age = 0;
+function Fruit() {// Fruit class
+	this._age = 0;
 	}
 
 Fruit.prototype.checkRot = function () {
@@ -16,38 +16,35 @@ Fruit.prototype.fruitMsg = function () {
 }
 
 Fruit.prototype.getAge = function () {
-	return this.__age;
-}
+	return this._age;
+};
 
 Fruit.prototype.IncrAge = function () {
-	this.__age++;
-	console.log("Apple is 1 week older")
+	this._age++;
+	console.log("Apple is 1 week older");
 }
 
-Fruit.prototype.reSetAge = function () {
-	this.__age = 0;
+Fruit.prototype.resetAge = function () {
+	this._age = 0;
 	console.log("age reset to 0");
-	}
+	};
 
-
-
-
-
-function Apple(weight, cultivar) {
+function Apple(weight, cultivar) {// Apple class
 	this.weight = weight;
 	this.cultivar = cultivar;
 }
 
 Apple.prototype = new Fruit();
 
-function pickApples()
-{
+function pickApples(){// Factory function for apples.  returns array of apple objects.
 	var numApples;
 	var tempApple;
+	var appleWeight;
+	var appleCultivar;
 	var maxSize = 12;
-	var appleBasket = []
+	var appleBasket = [];
 	appleBasket.length = maxSize;
-	var numApples = prompt("How many apples would you like to pick?");
+	numApples = prompt("How many apples would you like to pick?");
 
 	while(numApples>maxSize)
 	{
@@ -55,7 +52,7 @@ function pickApples()
 		numApples = prompt("How many apples would you like to pick?");
 	}
 	
-	for(i=0; i<numApples; i++)
+	for(var i=0; i<numApples; i++)
 	{
 		appleWeight = prompt("Enter weight for Apple "+i+": ");
 		appleCultivar = prompt("Enter cultivar for apple "+i+": ");
