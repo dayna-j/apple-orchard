@@ -1,19 +1,5 @@
 function Fruit() {// Fruit class
-	this._age = 0;
 	}
-
-Fruit.prototype.checkRot = function () {
-	if(this.getAge() > 3){
-		console.log("this piece of fruit is rotten..");
-	}
-	else {
-		console.log("It's still fresh enough to eat.")
-	}
-};
-
-Fruit.prototype.fruitMsg = function () {
-	console.log("I am fruit");
-}
 
 Fruit.prototype.getAge = function () {
 	return this._age;
@@ -29,7 +15,18 @@ Fruit.prototype.resetAge = function () {
 	console.log("age reset to 0");
 	};
 
+Fruit.prototype.checkRot = function () {
+	if(this.getAge() > 3){
+		console.log("this piece of fruit is rotten..");
+	}
+	else {
+		console.log("It's still fresh enough to eat.")
+	}
+};
+
+
 function Apple(weight, cultivar) {// Apple class
+	this._age = 0;
 	this.weight = weight;
 	this.cultivar = cultivar;
 }
