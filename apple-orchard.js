@@ -170,3 +170,4 @@ function pickFruit(typeFruit, numFruit, cultivar)
 var basket = pickApples(1,"granny smith");
 console.dir(basket);
 console.dir(basket[0]);
+
