@@ -58,18 +58,15 @@ Object.defineProperty(Fruit.prototype,"setAge",
 	{
 	set: 
 	function (_age)
-	{// if input age is less than the decay age, _isRotten = false
+	{// if input age is less than the decay age, _isRotten = false  use checkrot
 		this._age = _age;
-		if (this.getAge < this._decayAge)
-		{
-			this.setIsRotten = false;
-			console.log("Fruit is no longer rotten");
-		}
-	//  if input age is greater than decay age, _isRotten = true;  use checkrot instead????
-		if (this.getAge >= this._decayAge)
+		if (this.checkRot())
 		{
 			this.setIsRotten = true;
-			console.log("");
+		}
+		else
+		{
+			this.setIsRotten = false;
 		}
 	}}
 );
