@@ -1,21 +1,22 @@
-function Fruit() {// Abstract Fruit "base-class"
-	if(this.constructor === Fruit){// Implements Fruit as an 'Abstract' class.  
-		throw new Error("Can't instantiate abstract class!");
-	}
-	
+function Fruit() 
+{//Fruit "base-class"
 	this._age = 0;
 	this._weight = 0;
 	this._cultivar = "";
+	this._isRotten = false;
 }
 
-Object.defineProperty(Fruit.prototype,"getWeight",{
+Object.defineProperty(Fruit.prototype,"getWeight",
+	{
 	get: 
-	function(){
+	function()
+	{
 		return this._weight;
 	}}
 );
 
-Object.defineProperty(Fruit.prototype,"setWeight",{
+Object.defineProperty(Fruit.prototype,"setWeight",
+    {
 	set: 
 	function (weight)
 	{
@@ -23,65 +24,99 @@ Object.defineProperty(Fruit.prototype,"setWeight",{
 	}}
 );
 
-Object.defineProperty(Fruit.prototype,"getCultivar",{
+Object.defineProperty(Fruit.prototype,"getCultivar",
+	{
 	get: 
 	function(){
 		return this._cultivar;
 	}}
 );
 
-Object.defineProperty(Fruit.prototype,"setCultivar",{
-	set: 
-	function (cultivar)
+Object.defineProperty(Fruit.prototype,"setCultivar",
 	{
-		this._cultivar = cultivar;
+	set: 
+	function (_cultivar)
+	{
+		this._cultivar = _cultivar;
+		console.log("cultivar set");
 	}}
 );
 
-Object.defineProperty(Fruit.prototype,"getAge",{
+Object.defineProperty(Fruit.prototype,"getAge",
+	{
 	get: 
-	function(){
+	function()
+	{
 		return this._age;
 	}}
 );
 
-Object.defineProperty(Fruit.prototype,"setAge",{
-	set: 
-	function (age)
+Object.defineProperty(Fruit.prototype,"setAge",
 	{
+	set: 
+	function (_age)
+	{// based on the 
 		this._age = _age;
 	}}
 );
 
-Fruit.prototype.IncrAge = function () {
-	this._age++;
+Object.defineProperty(Fruit.prototype,"setIsRotten",
+	{
+	set: 
+	function ()
+	{
+		console.log("The fruit is now Rotten..");
+		this._isRotten= true;
+		return 
+	}}
+);
+
+Fruit.prototype.IncrAge = function () // !!!!!!!!!!!!
+{
+	this._age++;// increment age
 	console.log("Apple is 1 week older");
+	if(this.checkRot())
+	{
+		this.setIsRotten;// problem line??
+	};
 };
 
-Fruit.prototype.resetAge = function () {
+Fruit.prototype.resetAge = function () 
+{
 	this._age = 0;
 	console.log("age reset to 0");
-	};
+};
 
-Fruit.prototype.checkRot = function () {
-	if(this.getAge() > 3){
+Fruit.prototype.checkRot = function () 
+{// !!!!change to a getter for the _isRotten property.!!!!
+	if(this.getAge > 3)
+	{
 		console.log("this piece of fruit is rotten..");
+		return true;
+		
 	}
-	else {
+	else 
+	{
 		console.log("It's still fresh enough to eat.")
+		return false;
 	}
 };
 
-function Orange(){// Orange class inherits from Fruit
+function Orange()
+{// Orange class inherits from Fruit
+	var _species = 'orange';
 }
 
-function Apple() {// Apple class inherits from Fruit
+function Apple() 
+{// Apple class inherits from Fruit
+	var _species = 'apple';
 }
 
 Apple.prototype = new Fruit();
 Orange.prototype = new Fruit();
 
-function pickApples(numApples, appleCultivar){// Factory function for apples.  returns array of apple objects.
+function pickApples(numApples, appleCultivar)
+{// Factory function for apples.  returns array of apple objects.
 	var tempApple;
 	var appleWeight;
 	var appleCultivar;
@@ -89,7 +124,8 @@ function pickApples(numApples, appleCultivar){// Factory function for apples.  r
 	var appleBasket = [];
 	appleBasket.length = maxSize;
 	
-	if(numApples>12){
+	if(numApples>maxSize)
+	{
 		return console.log("You can only pick 12 apples at a time.");
 	}
 	
@@ -103,5 +139,20 @@ function pickApples(numApples, appleCultivar){// Factory function for apples.  r
 	return appleBasket;
 }
 
-var basket = pickApples(3,"granny smith");
+function pickFruit(typeFruit, numFruit, cultivar)
+{
+// !!!! Generalized ' pick ' function.  create up to 12 of any fruit object !!!!
+	var tempFruit, fruitWeight, cultivar;
+	
+	var fruitBasket = [];
+	var maxSize = 12;
+	fruitBasket.length = maxSize;
+	
+	if(numFruit>maxSize){
+		return console.log("You can only pick 12 pieces of fruit at a time.");
+	}
+}
+
+var basket = pickApples(1,"granny smith");
 console.dir(basket);
+console.dir(basket[0]);
