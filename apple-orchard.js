@@ -1,14 +1,58 @@
-function Fruit() {// Fruit class
-	}
+function Fruit() {// Fruit "base-class"
+	this._age = 0;
+	this._weight = 0;
+	this._cultivar = "";
+}
 
-Fruit.prototype.getAge = function () {
-	return this._age;
-};
+Object.defineProperty(Fruit.prototype,"getWeight",{
+	get: 
+	function(){
+		return this._weight;
+	}}
+);
+
+Object.defineProperty(Fruit.prototype,"setWeight",{
+	set: 
+	function (weight)
+	{
+		this._weight = weight;
+	}}
+);
+
+Object.defineProperty(Fruit.prototype,"getCultivar",{
+	get: 
+	function(){
+		return this._cultivar;
+	}}
+);
+
+Object.defineProperty(Fruit.prototype,"setCultivar",{
+	set: 
+	function (cultivar)
+	{
+		this._cultivar = cultivar;
+	}}
+);
+
+Object.defineProperty(Fruit.prototype,"getAge",{
+	get: 
+	function(){
+		return this._age;
+	}}
+);
+
+Object.defineProperty(Fruit.prototype,"setAge",{
+	set: 
+	function (age)
+	{
+		this._age = _age;
+	}}
+);
 
 Fruit.prototype.IncrAge = function () {
 	this._age++;
 	console.log("Apple is 1 week older");
-}
+};
 
 Fruit.prototype.resetAge = function () {
 	this._age = 0;
@@ -24,37 +68,36 @@ Fruit.prototype.checkRot = function () {
 	}
 };
 
+function Orange(){// Orange class inherits from Fruit
+}
 
-function Apple(weight, cultivar) {// Apple class
-	this._age = 0;
-	this.weight = weight;
-	this.cultivar = cultivar;
+function Apple() {// Apple class inherits from Fruit
 }
 
 Apple.prototype = new Fruit();
+Orange.prototype = new Fruit();
 
-function pickApples(){// Factory function for apples.  returns array of apple objects.
-	var numApples;
+function pickApples(numApples, appleCultivar){// Factory function for apples.  returns array of apple objects.
 	var tempApple;
 	var appleWeight;
 	var appleCultivar;
 	var maxSize = 12;
 	var appleBasket = [];
 	appleBasket.length = maxSize;
-	numApples = prompt("How many apples would you like to pick?");
-
-	while(numApples>maxSize)
-	{
-		alert("Your basket can only hold 12 apples..");
-		numApples = prompt("How many apples would you like to pick?");
+	
+	if(numApples>12){
+		return console.log("You can only pick 12 apples at a time.");
 	}
 	
 	for(var i=0; i<numApples; i++)
 	{
-		appleWeight = prompt("Enter weight for Apple "+i+": ");
-		appleCultivar = prompt("Enter cultivar for apple "+i+": ");
-		tempApple = new Apple(appleWeight, appleCultivar);
+		tempApple = new Apple();
+		tempApple.setWeight = prompt("Enter weight for apple "+(i+1)+":");
+		tempApple.setCultivar = appleCultivar;
 		appleBasket[i] = tempApple;
 	}		
 	return appleBasket;
 }
+
+var basket = pickApples(1,"pink lady");
+console.dir(basket);
