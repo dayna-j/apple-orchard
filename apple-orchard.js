@@ -3,7 +3,6 @@ function Fruit() {// Fruit "base-class"
 	this._weight = 0;
 	this._cultivar = "";
 }
-<<<<<<< HEAD
 
 Object.defineProperty(Fruit.prototype,"getWeight",{
 	get: 
@@ -49,12 +48,6 @@ Object.defineProperty(Fruit.prototype,"setAge",{
 		this._age = _age;
 	}}
 );
-=======
-
-Fruit.prototype.getAge = function () {
-	return this._age;	
-};
->>>>>>> 091207f84d6d5fb7a3b96c724949f23ca78a37ee
 
 Fruit.prototype.IncrAge = function () {
 	this._age++;
@@ -106,9 +99,5 @@ function pickApples(numApples, appleCultivar){// Factory function for apples.  r
 	return appleBasket;
 }
 
-<<<<<<< HEAD
-
-=======
 var basket = pickApples(3,"granny smith");
->>>>>>> 091207f84d6d5fb7a3b96c724949f23ca78a37ee
 console.dir(basket);
