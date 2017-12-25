@@ -71,23 +71,6 @@ Object.defineProperty(Fruit.prototype,"setAge",
 	}}
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Object.defineProperty(Fruit.prototype,"setIsRotten",
 	{
 	set: 
