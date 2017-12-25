@@ -1,4 +1,8 @@
-function Fruit() {// Fruit "base-class"
+function Fruit() {// Abstract Fruit "base-class"
+	if(this.constructor === Fruit){// Implements Fruit as an 'Abstract' class.  
+		throw new Error("Can't instantiate abstract class!");
+	}
+	
 	this._age = 0;
 	this._weight = 0;
 	this._cultivar = "";
