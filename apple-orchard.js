@@ -1,4 +1,6 @@
-// write input validation function for accessor methods
+// write input validation function for accessor methods.  try-catch-throw
+
+// write pickFruit function with 2 parameters;  numFruit and cultivar.  cultivar will be used to find the right picking function
 
 function Fruit()
 {//Fruit "base-class"
@@ -19,10 +21,15 @@ Object.defineProperty(Fruit.prototype,"getWeight",
 );
 
 Object.defineProperty(Fruit.prototype,"setWeight",
-    {
+    {//input validation:  test for NaN, cannot be empty
 	set: 
 	function (weight)
 	{
+		if(isNaN(weight) || !weight)
+		{
+			console.log("invalid input");
+			throw "Invalid input";
+		}
 		this._weight = weight;
 	}}
 );
@@ -151,6 +158,9 @@ var fruitMenu =
 		"valencia": 'orange',
 	};
 
+
+
+
 function pickApples(numApples, appleCultivar)
 {// Factory function for apples.  returns array of apple objects.
 	var tempApple;
@@ -199,19 +209,24 @@ function pickOranges(numOranges, orangeCultivar)
 	return orangeBasket;
 }
 
-function pickFruit(typeFruit, numFruit, cultivar)
+function pickFruit(numFruit, cultivar)
 {
-// !!!! Generalized ' pick ' function.  create up to 12 of any fruit object !!!!
-	var tempFruit, fruitWeight, cultivar;
 	
-	var fruitBasket = [];
-	var maxSize = 12;
-	fruitBasket.length = maxSize;
-	
-	if(numFruit>maxSize){
-		return console.log("You can only pick 12 pieces of fruit at a time.");
-	}
 }
+
+//function pickFruit(typeFruit, numFruit, cultivar)
+//{
+//// !!!! Generalized ' pick ' function.  create up to 12 of any fruit object !!!!
+//	var tempFruit, fruitWeight, cultivar;
+//	
+//	var fruitBasket = [];
+//	var maxSize = 12;
+//	fruitBasket.length = maxSize;
+//	
+//	if(numFruit>maxSize){
+//		return console.log("You can only pick 12 pieces of fruit at a time.");
+//	}
+//}
 
 var basket1 = pickApples(1,"granny smith");
 var basket2 = pickOranges(1, "navel");
@@ -219,3 +234,5 @@ console.dir(basket1);
 console.dir(basket1[0]);
 console.dir(basket2);
 console.dir(basket2[0]);
+
+
