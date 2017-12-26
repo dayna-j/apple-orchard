@@ -1,6 +1,6 @@
-// add getter/setter for decayAge
+// write input validation function for accessor methods
 
-function Fruit() 
+function Fruit()
 {//Fruit "base-class"
 	this._age = 0;
 	this._weight = 0;
@@ -75,7 +75,6 @@ Object.defineProperty(Fruit.prototype,"setIsRotten",
 	set: 
 	function (_isRotten)
 	{
-//		console.log("The fruit is now Rotten..");
 		this._isRotten = _isRotten;
 	}}
 );
@@ -115,8 +114,8 @@ Fruit.prototype.resetAge = function ()
 	console.log("age reset to 0");
 };
 
-Fruit.prototype.checkRot = function () 
-{// !!!!change to a getter for the _isRotten property.!!!!
+Fruit.prototype.checkRot = function ()
+{// !!!! change to a getter for the _isRotten property !!!!
 	if(this.getAge > this.getDecayAge)
 	{
 		console.log("this piece of fruit is rotten..");
@@ -176,6 +175,30 @@ function pickApples(numApples, appleCultivar)
 	return appleBasket;
 }
 
+function pickOranges(numOranges, orangeCultivar)
+{// Factory function for apples.  returns array of apple objects.
+	var tempOrange;
+	var orangeWeight;
+	var orangeCultivar;
+	var maxSize = 12;
+	var orangeBasket = [];
+	orangeBasket.length = maxSize;
+	
+	if(numOranges>maxSize)
+	{
+		return console.log("You can only pick 12 apples at a time.");
+	}
+	
+	for(var i=0; i<numOranges; i++)
+	{
+		tempOrange = new Orange();
+		tempOrange.setWeight = prompt("Enter weight for orange "+(i+1)+":");
+		tempOrange.setCultivar = orangeCultivar;
+		orangeBasket[i] = tempOrange;
+	}		
+	return orangeBasket;
+}
+
 function pickFruit(typeFruit, numFruit, cultivar)
 {
 // !!!! Generalized ' pick ' function.  create up to 12 of any fruit object !!!!
@@ -190,6 +213,9 @@ function pickFruit(typeFruit, numFruit, cultivar)
 	}
 }
 
-var basket = pickApples(1,"granny smith");
-console.dir(basket);
-console.dir(basket[0]);
+var basket1 = pickApples(1,"granny smith");
+var basket2 = pickOranges(1, "navel");
+console.dir(basket1);
+console.dir(basket1[0]);
+console.dir(basket2);
+console.dir(basket2[0]);
