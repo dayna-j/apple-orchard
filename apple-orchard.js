@@ -1,4 +1,4 @@
-// add getter/setter for decayAge??
+// add getter/setter for decayAge
 
 function Fruit() 
 {//Fruit "base-class"
@@ -41,7 +41,6 @@ Object.defineProperty(Fruit.prototype,"setCultivar",
 	function (_cultivar)
 	{
 		this._cultivar = _cultivar;
-//		console.log("cultivar set");
 	}}
 );
 
@@ -81,9 +80,27 @@ Object.defineProperty(Fruit.prototype,"setIsRotten",
 	}}
 );
 
-Fruit.prototype.IncrAge = function () // !!!!!!!!!!!!
+Object.defineProperty(Fruit.prototype,"setDecayAge",
+	{
+	set: 
+	function (_decayAge)
+	{
+		this.decayAge = _decayAge;
+	}}
+);
+
+Object.defineProperty(Fruit.prototype,"getDecayAge",
+	{
+	get: 
+	function()
+	{
+		return this._decayAge;
+	}}
+);
+
+Fruit.prototype.IncrAge = function ()
 {
-	this._age++;// increment age
+	this._age++;
 	console.log("Apple is 1 week older");
 	if(this.checkRot())
 	{
@@ -93,14 +110,14 @@ Fruit.prototype.IncrAge = function () // !!!!!!!!!!!!
 
 Fruit.prototype.resetAge = function () 
 {
-	this._age = 0;
+	this.setAge = 0;
 	this.setIsRotten = false;
 	console.log("age reset to 0");
 };
 
 Fruit.prototype.checkRot = function () 
 {// !!!!change to a getter for the _isRotten property.!!!!
-	if(this.getAge > this._decayAge)
+	if(this.getAge > this.getDecayAge)
 	{
 		console.log("this piece of fruit is rotten..");
 		return true;
@@ -125,6 +142,15 @@ function Apple()
 
 Apple.prototype = new Fruit();
 Orange.prototype = new Fruit();
+
+var fruitMenu = 
+	{
+		"granny smithy": 'apple',
+		"fuji": 'apple',
+		"gala": 'apple',
+		"navel": 'orange',
+		"valencia": 'orange',
+	};
 
 function pickApples(numApples, appleCultivar)
 {// Factory function for apples.  returns array of apple objects.
@@ -167,4 +193,3 @@ function pickFruit(typeFruit, numFruit, cultivar)
 var basket = pickApples(1,"granny smith");
 console.dir(basket);
 console.dir(basket[0]);
-
