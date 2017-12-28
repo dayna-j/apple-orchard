@@ -1,4 +1,5 @@
-// write input validation function for accessor methods.  try-catch-throw
+// write input validation function.  returns true when errors exist.
+// inputValidator
 
 // write pickFruit function with 2 parameters;  numFruit and cultivar.  cultivar will be used to find the right picking function
 
@@ -11,7 +12,7 @@ function Fruit()
 	this._decayAge = 3;
 }
 
-Object.defineProperty(Fruit.prototype,"getWeight",
+Object.defineProperty(Fruit.prototype, "getWeight",
 	{
 	get: 
 	function()
@@ -25,11 +26,6 @@ Object.defineProperty(Fruit.prototype,"setWeight",
 	set: 
 	function (weight)
 	{
-		if(isNaN(weight) || !weight)
-		{
-			console.log("invalid input");
-			throw "Invalid input";
-		}
 		this._weight = weight;
 	}}
 );
@@ -158,9 +154,6 @@ var fruitMenu =
 		"valencia": 'orange',
 	};
 
-
-
-
 function pickApples(numApples, appleCultivar)
 {// Factory function for apples.  returns array of apple objects.
 	var tempApple;
@@ -178,7 +171,14 @@ function pickApples(numApples, appleCultivar)
 	for(var i=0; i<numApples; i++)
 	{
 		tempApple = new Apple();
-		tempApple.setWeight = prompt("Enter weight for apple "+(i+1)+":");
+		var tempWeight;
+		
+		do {
+			tempWeight = prompt("Enter weight for apple "+(i+1)+":");
+		// weight must be greater or equal 1, must be a number and cannot be empty string 			
+		} while( tempWeight < 1 || isNaN(tempWeight) || !tempWeight.length );
+				
+		tempApple.setWeight = tempWeight;
 		tempApple.setCultivar = appleCultivar;
 		appleBasket[i] = tempApple;
 	}		
@@ -202,7 +202,14 @@ function pickOranges(numOranges, orangeCultivar)
 	for(var i=0; i<numOranges; i++)
 	{
 		tempOrange = new Orange();
-		tempOrange.setWeight = prompt("Enter weight for orange "+(i+1)+":");
+		var tempWeight;
+		
+		do {
+			tempWeight = prompt("Enter weight for orange "+(i+1)+":");
+		// weight must be greater or equal 1, must be a number and cannot be empty string 			
+		} while( tempWeight < 1 || isNaN(tempWeight) || !tempWeight.length );
+		
+		tempOrange.setWeight = tempWeight;
 		tempOrange.setCultivar = orangeCultivar;
 		orangeBasket[i] = tempOrange;
 	}		
