@@ -1,7 +1,9 @@
-// write input validation function.  returns true when errors exist.
-// inputValidator
-
-// write pickFruit function with 2 parameters;  numFruit and cultivar.  cultivar will be used to find the right picking function
+//function inputValidator(input){
+//	do {
+//		tempWeight = prompt("Enter weight for apple "+(i+1)+":");
+//	  // weight must be greater or equal 1, must be a number and cannot be empty string 			
+//	} while( tempWeight < 1 || isNaN(tempWeight) || !tempWeight.length );
+//}
 
 function Fruit()
 {//Fruit "base-class"
@@ -107,7 +109,7 @@ Fruit.prototype.IncrAge = function ()
 	if(this.checkRot())
 	{
 		this.setIsRotten = true;
-	};
+	}
 };
 
 Fruit.prototype.resetAge = function () 
@@ -150,6 +152,8 @@ var fruitMenu =
 		"granny smithy": 'apple',
 		"fuji": 'apple',
 		"gala": 'apple',
+		"honeycrisp": 'apple',
+		"red delicious": 'apple',
 		"navel": 'orange',
 		"valencia": 'orange',
 	};
@@ -157,7 +161,6 @@ var fruitMenu =
 function pickApples(numApples, appleCultivar)
 {// Factory function for apples.  returns array of apple objects.
 	var tempApple;
-	var appleWeight;
 	var appleCultivar;
 	var maxSize = 12;
 	var appleBasket = [];
@@ -171,14 +174,12 @@ function pickApples(numApples, appleCultivar)
 	for(var i=0; i<numApples; i++)
 	{
 		tempApple = new Apple();
-		var tempWeight;
 		
 		do {
-			tempWeight = prompt("Enter weight for apple "+(i+1)+":");
+		tempApple.setWeight = prompt("Enter weight for apple "+(i+1)+":");
 		// weight must be greater or equal 1, must be a number and cannot be empty string 			
-		} while( tempWeight < 1 || isNaN(tempWeight) || !tempWeight.length );
-				
-		tempApple.setWeight = tempWeight;
+		} while( tempApple.getWeight < 1 || isNaN(tempApple.getWeight) || !tempApple.getWeight.length );
+
 		tempApple.setCultivar = appleCultivar;
 		appleBasket[i] = tempApple;
 	}		
@@ -188,7 +189,6 @@ function pickApples(numApples, appleCultivar)
 function pickOranges(numOranges, orangeCultivar)
 {// Factory function for apples.  returns array of apple objects.
 	var tempOrange;
-	var orangeWeight;
 	var orangeCultivar;
 	var maxSize = 12;
 	var orangeBasket = [];
@@ -202,44 +202,41 @@ function pickOranges(numOranges, orangeCultivar)
 	for(var i=0; i<numOranges; i++)
 	{
 		tempOrange = new Orange();
-		var tempWeight;
 		
 		do {
-			tempWeight = prompt("Enter weight for orange "+(i+1)+":");
+			tempOrange.setWeight = prompt("Enter weight for orange "+(i+1)+":");
 		// weight must be greater or equal 1, must be a number and cannot be empty string 			
-		} while( tempWeight < 1 || isNaN(tempWeight) || !tempWeight.length );
+		} while( tempOrange.getWeight < 1 || isNaN(tempOrange.getWeight) || !tempOrange.getWeight.length );
 		
-		tempOrange.setWeight = tempWeight;
 		tempOrange.setCultivar = orangeCultivar;
 		orangeBasket[i] = tempOrange;
 	}		
 	return orangeBasket;
 }
 
+// Object agnostic picking function.  
 function pickFruit(numFruit, cultivar)
 {
-	
+
+	if(fruitMenu[cultivar])
+	{
+	switch(fruitMenu[cultivar])
+	{
+		case "apple":
+			return pickApples(numFruit, cultivar);
+		case "orange":
+			return pickOranges(numFruit, cultivar);
+    }
+	}
+	else {console.log("We don't have that in stock..");}
 }
 
-//function pickFruit(typeFruit, numFruit, cultivar)
-//{
-//// !!!! Generalized ' pick ' function.  create up to 12 of any fruit object !!!!
-//	var tempFruit, fruitWeight, cultivar;
-//	
-//	var fruitBasket = [];
-//	var maxSize = 12;
-//	fruitBasket.length = maxSize;
-//	
-//	if(numFruit>maxSize){
-//		return console.log("You can only pick 12 pieces of fruit at a time.");
-//	}
-//}
-
-var basket1 = pickApples(1,"granny smith");
-var basket2 = pickOranges(1, "navel");
+//var basket1 = pickApples(1,"granny smith");
+//var basket2 = pickOranges(1, "navel");
+var basket1 = pickFruit(2,'honeycisp');
 console.dir(basket1);
 console.dir(basket1[0]);
-console.dir(basket2);
-console.dir(basket2[0]);
+//console.dir(basket2);
+//console.dir(basket2[0]);
 
 
